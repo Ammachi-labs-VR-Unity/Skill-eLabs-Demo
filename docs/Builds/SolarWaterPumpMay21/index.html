@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WGL 0606 Solar Pump NewestG.loader.js";
+      var loaderUrl = buildUrl + "/SolarWaterPumpMay21.loader.js";
       var config = {
-        dataUrl: buildUrl + "/WGL 0606 Solar Pump NewestG.data.unityweb",
-        frameworkUrl: buildUrl + "/WGL 0606 Solar Pump NewestG.framework.js.unityweb",
-        codeUrl: buildUrl + "/WGL 0606 Solar Pump NewestG.wasm.unityweb",
+        dataUrl: buildUrl + "/SolarWaterPumpMay21.data.unityweb",
+        frameworkUrl: buildUrl + "/SolarWaterPumpMay21.framework.js.unityweb",
+        codeUrl: buildUrl + "/SolarWaterPumpMay21.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "unknown",
         productName: "Solar Panel Installation Agricultural Field",
@@ -94,8 +94,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "1280px";
+        canvas.style.height = "720px";
       }
 
       loadingBar.style.display = "block";
