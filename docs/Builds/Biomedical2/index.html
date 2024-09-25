@@ -118,6 +118,23 @@
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
+			///////////////
+			
+			canvas = document.getElementById("unity-canvas");
+			gl = canvas.getContext("webgl");
+			var width = canvas.clientWidth;
+			var height = canvas.clientHeight;
+			if (canvas.width != width ||canvas.height != height) 
+			{
+				canvas.width = width;
+				canvas.height = height;
+
+				gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+			}
+			
+			
+			
+			///////////////////
           };
         }).catch((message) => {
           alert(message);
