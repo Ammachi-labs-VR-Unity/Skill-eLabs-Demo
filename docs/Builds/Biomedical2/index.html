@@ -3,16 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Waste Management</title>
-	<link rel="manifest" href="manifest.json">
+    <title>Unity Web Player | Waste Management</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="stylesheet" href="TemplateData/customtemplate.css">
   </head>
   <body>
-  <!--Answer from https://discussions.unity.com/t/webgl-fill-browser-but-preserve-aspect-ratio/246766 -->
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1280 height=720 ></canvas> <!-- style = "height:70%; aspect-ratio:16/9;"  ></canvas>-->
+      <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -21,19 +18,13 @@
       </div>
       <div id="unity-warning"> </div>
       <div id="unity-footer">
-<!--        <div id="unity-webgl-logo"></div>-->
+        <div id="unity-logo-title-footer"></div>
         <div id="unity-fullscreen-button"></div>
-        <div>Developed by Amrita Vishwa Vidyapeetham</div>
-<!--        <div id="unity-build-title">Waste Management</div>-->
+        <div id="unity-build-title">Waste Management</div>
       </div>
     </div>
     <script>
-      var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var warningBanner = document.querySelector("#unity-warning");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -42,6 +33,7 @@
       // way that non-critical warnings and error messages are presented to the
       // user.
       function unityShowBanner(msg, type) {
+        var warningBanner = document.querySelector("#unity-warning");
         function updateBannerVisibility() {
           warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
         }
@@ -62,6 +54,7 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/Biomedical2.loader.js";
       var config = {
+        arguments: [],
         dataUrl: buildUrl + "/Biomedical2.data",
         frameworkUrl: buildUrl + "/Biomedical2.framework.js",
         codeUrl: buildUrl + "/Biomedical2.wasm",
@@ -72,12 +65,21 @@
         showBanner: unityShowBanner,
       };
 
-      // By default Unity keeps WebGL canvas render target size matched with
+      // By default, Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
       // Set this to false if you want to decouple this synchronization from
       // happening inside the engine, and you would instead like to size up
       // the canvas DOM size and WebGL render target sizes yourself.
       // config.matchWebGLToCanvasSize = false;
+
+      // If you would like all file writes inside Unity Application.persistentDataPath
+      // directory to automatically persist so that the contents are remembered when
+      // the user revisits the site the next time, uncomment the following line:
+      // config.autoSyncPersistentDataPath = true;
+      // This autosyncing is currently not the default behavior to avoid regressing
+      // existing user projects that might rely on the earlier manual
+      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
+      // expected to change.
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -86,63 +88,40 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        container.className = "unity-mobile";
+        document.querySelector("#unity-container").className = "unity-mobile";
+        canvas.className = "unity-mobile";
 
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
 
-        // canvas.style.width = window.innerWidth + 'px';
-        // canvas.style.height = window.innerHeight + 'px';
 
-        canvas.style.width = "100%";//window.innerWidth + 'px';
-        canvas.style.height = "100%";//window.innerHeig + 'px';
-        canvas.style.left = "0px";//window.innerHeig + 'px';
-        canvas.style.top = "0px";//window.innerHeight + 'px';
-        canvas.style.position = "absolute";//window.innerHeight + 'px';
-
-        // unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
         canvas.style.width = "1280px";
         canvas.style.height = "720px";
       }
 
-      loadingBar.style.display = "block";
+      document.querySelector("#unity-loading-bar").style.display = "block";
 
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-			///////////////
-			/*
-			canvas = document.getElementById("unity-canvas");
-			gl = canvas.getContext("webgl");
-			var width = canvas.clientWidth;
-			var height = canvas.clientHeight;
-			if (canvas.width != width ||canvas.height != height) 
-			{
-				canvas.width = width;
-				canvas.height = height;
+          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+              }).then((unityInstance) => {
+                document.querySelector("#unity-loading-bar").style.display = "none";
+                document.querySelector("#unity-fullscreen-button").onclick = () => {
+                  unityInstance.SetFullscreen(1);
+                };
 
-				gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-			}
-			*/
-			
-			
-			///////////////////
-          };
-        }).catch((message) => {
-          alert(message);
-        });
-      };
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+
       document.body.appendChild(script);
+
     </script>
   </body>
 </html>
