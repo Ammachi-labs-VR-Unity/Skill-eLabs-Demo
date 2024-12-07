@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Skill Labs (VSL) for PSSCIVE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .funding {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .instructions {
+            background: #e1f5fe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .lab-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        .lab-link:hover {
+            text-decoration: none;
+        }
+
+        .lab-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            height: 160px; /* Fixed height for all cards */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lab-card::after {
+            content: "Launch Simulation →";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.5rem;
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.2s;
+        }
+
+        .lab-card:hover::after {
+            transform: translateY(0);
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .lab-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lab-code {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lab-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .coming-soon::after {
+            content: "Coming Soon";
+            background: rgba(108, 117, 125, 0.9);
+        }
+
+        .healthcare { color: #e74c3c; }
+        .beauty { color: #9b59b6; }
+        .tourism { color: #3498db; }
+        .plumbing { color: #34495e; }
+        .solar { color: #f1c40f; }
+        .telecom { color: #2ecc71; }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lab-card::after {
+                transform: translateY(0);
+                font-size: 0.9rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Virtual Skill Labs (VSL) for PSSCIVE</h1>
+            <div class="subtitle">Simulations Developed by Amrita Vishwa Vidyapeetham</div>
+            <div class="funding">Funded by Ministry of Education</div>
+            <div class="instructions">
+                <i class="fas fa-info-circle"></i>
+                Click or tap on any lab module to begin the simulation
+            </div>
+        </header>
+
+        <div class="grid">
+            <a href="https://ammachi-labs-vr-unity.github.io/Skill-eLabs-Demo/Builds/Biomedical1_6/index.html" class="lab-link" target="_blank">
+                <div class="lab-card">
+                    <i class="fas fa-hospital-waste icon healthcare"></i>
+                    <div class="lab-code">VSL01</div>
+                    <div class="lab-title">Healthcare: Biomedical Waste Management</div>
+                </div>
+            </a>
+
+            <a href="https://ammachi-labs-vr-unity.github.io/Skill-eLabs-Demo/Builds/Laser1_3/index.html" class="lab-link" target="_blank">
+                <div class="lab-card">
+                    <i class="fas fa-laser-pointer icon beauty"></i>
+                    <div class="lab-code">VSL02</div>
+                    <div class="lab-title">Beauty & Wellness: Laser-based Hair Removal</div>
+                </div>
+            </a>
+
+            <a href="https://ammachi-labs-vr-unity.github.io/Skill-eLabs-Demo/Builds/LaserTattooV1_4/index.html" class="lab-link" target="_blank">
+                <div class="lab-card">
+                    <i class="fas fa-spray-can icon beauty"></i>
+                    <div class="lab-code">VSL03</div>
+                    <div class="lab-title">Beauty & Wellness: Laser-based Tattoo Removal</div>
+                </div>
+            </a>
+
+            <a href="#VSL04" class="lab-link">
+                <div class="lab-card">
+                    <i class="fas fa-heartbeat icon healthcare"></i>
+                    <div class="lab-code">VSL04</div>
+                    <div class="lab-title">Healthcare: First Aid - CPR</div>
+                </div>
+            </a>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-hospital-user icon healthcare"></i>
+                <div class="lab-code">VSL05</div>
+                <div class="lab-title">Healthcare: Setup a Patient Monitoring System</div>
+            </div>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-route icon tourism"></i>
+                <div class="lab-code">VSL06</div>
+                <div class="lab-title">Tourism: Prepare a Travel Itinerary</div>
+            </div>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-faucet icon plumbing"></i>
+                <div class="lab-code">VSL07</div>
+                <div class="lab-title">Plumbing: Install a Sensor Faucet</div>
+            </div>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-solar-panel icon solar"></i>
+                <div class="lab-code">VSL08</div>
+                <div class="lab-title">Solar: Install an Offgrid Solar System</div>
+            </div>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-network-wired icon telecom"></i>
+                <div class="lab-code">VSL09</div>
+                <div class="lab-title">Telecom: Perform Splicing</div>
+            </div>
+
+            <div class="lab-card coming-soon">
+                <i class="fas fa-spa icon beauty"></i>
+                <div class="lab-code">VSL10</div>
+                <div class="lab-title">Beauty & Wellness: Cold Laser Therapy</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
